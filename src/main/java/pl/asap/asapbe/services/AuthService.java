@@ -9,6 +9,7 @@ import pl.asap.asapbe.repositories.UserAuthDetailsRepository;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -25,10 +26,10 @@ public class AuthService {
     private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
      public UserAuthDetailsEntity authenticateUserByToken(String authToken) {
-        UserAuthDetailsEntity userDetails = userAuthDetailsRepository.findByToken(authToken);
-        if (userDetails == null)
+        Optional<UserAuthDetailsEntity> userDetailsOptional = userAuthDetailsRepository.findByToken(authToken);
+        if (!userDetailsOptional.isPresent())
             throw new UserAuthenticationException();
-        return userDetails;
+        return userDetailsOptional.get();
     }
 
     public String generateToken() {

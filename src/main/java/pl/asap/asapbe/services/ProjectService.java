@@ -41,7 +41,7 @@ public class ProjectService extends BaseService {
     }
 
     public void performProjectCreation(String authToken, ProjectEntity projectEntity) {
-        if (projectRepository.findByTitle(projectEntity.getTitle()) != null)//project already exsits
+        if (projectRepository.findByTitle(projectEntity.getTitle()).isPresent())//project already exsits
             throw new ProjectAlreadyExistsInDatabaseException();
         else {//project doesn't exist
             UserAuthDetailsEntity userAuthDetailsEntity = authService.authenticateUserByToken(authToken);

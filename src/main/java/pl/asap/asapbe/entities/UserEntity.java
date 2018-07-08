@@ -24,6 +24,10 @@ public class UserEntity {
     @JsonIgnore
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "supervisor")
+    @JsonIgnore
+    private ProjectEntity projectEntity;
+
     @OneToMany(mappedBy = "assignee")
     @JsonIgnore
     private Set<TaskEntity> tasks;
