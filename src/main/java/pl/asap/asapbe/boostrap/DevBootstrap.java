@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import pl.asap.asapbe.entities.ProjectEntity;
-import pl.asap.asapbe.entities.TaskEntity;
-import pl.asap.asapbe.entities.UserAuthDetailsEntity;
-import pl.asap.asapbe.entities.UserEntity;
+import pl.asap.asapbe.entities.*;
 import pl.asap.asapbe.repositories.ProjectRepository;
 import pl.asap.asapbe.repositories.TaskRepository;
 import pl.asap.asapbe.repositories.UserAuthDetailsRepository;
@@ -42,10 +39,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         //school project
         ProjectEntity school_project = new ProjectEntity("School project");
         UserEntity marek = new UserEntity("Marek", "Kowalski", "marek_kowalski@gmail.com", authService.encryptPassword("qwerty123"));
-        UserEntity krzysztof = new UserEntity("Krzysztof", "Nowak", "krzysztof_nowak@gmail.com", authService.encryptPassword("lubiePlacki123"));
-        UserEntity patryk = new UserEntity("Patryk", "Kopiec", "patryk_kopiec@gmail.com", authService.encryptPassword("nie_pamietam"));
-        TaskEntity taskInitRepo = new TaskEntity("Init repository", "Create repository and create corresponding project", TaskEntity.Status.OPEN, TaskEntity.Priority.HIGH);
-        TaskEntity taskCreateDb = new TaskEntity("createDatabase", "Create database and Entity classes", TaskEntity.Status.OPEN, TaskEntity.Priority.HIGH);
+        UserEntity krzysztof = new UserEntity("Krzysztof", "Nowak", "krzysztof_nowak@gmail.com", authService.encryptPassword("password321"));
+        UserEntity patryk = new UserEntity("Patryk", "Kopiec", "patryk_kopiec@gmail.com", authService.encryptPassword("password123"));
+        TaskEntity taskInitRepo = new TaskEntity("Init repository", "Create repository and create corresponding project", Status.OPEN, Priority.HIGH);
+        TaskEntity taskCreateDb = new TaskEntity("createDatabase", "Create database and Entity classes", Status.OPEN, Priority.HIGH);
         UserAuthDetailsEntity marekUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
         UserAuthDetailsEntity krzysztofUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
         UserAuthDetailsEntity patrykUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
@@ -83,7 +80,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         userAuthDetailsRepository.save(marekUserAuthDetails);
         userAuthDetailsRepository.save(krzysztofUserAuthDetails);
         userAuthDetailsRepository.save(patrykUserAuthDetails);
-
         ProjectEntity projectEntity = projectRepository.save(school_project);
 
         //setting projects to tasks since it is bidirectional relation

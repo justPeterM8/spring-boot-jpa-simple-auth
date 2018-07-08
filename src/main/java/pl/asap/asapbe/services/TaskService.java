@@ -9,6 +9,7 @@ import pl.asap.asapbe.entities.UserEntity;
 import pl.asap.asapbe.exceptions.InsufficientPermissionException;
 import pl.asap.asapbe.exceptions.NoSuchTaskException;
 import pl.asap.asapbe.exceptions.TaskAlreadyExistsInProjectException;
+import pl.asap.asapbe.exceptions.UserNotPartOfProjectException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,13 @@ public class TaskService extends BaseService {
 
     private ProjectService projectService;
     private UserService userService;
+    private UserAuthDetailsService userAuthDetailsService;
 
     @Autowired
-    public TaskService(ProjectService projectService, UserService userService) {
+    public TaskService(ProjectService projectService, UserService userService, UserAuthDetailsService userAuthDetailsService) {
         this.projectService = projectService;
         this.userService = userService;
+        this.userAuthDetailsService = userAuthDetailsService;
     }
 
     public List<TaskEntity> getAllTasksFromProject(String authToken, Long projectId) {
@@ -47,7 +50,7 @@ public class TaskService extends BaseService {
         ProjectEntity projectEntity = projectService.getProjectFromDbById(projectId);
         if (!isTaskAlreadyCreatedInProject(projectEntity.getTasks(), taskEntity)) {//check if there is task with the same title already in this project
             Set<TaskEntity> tasks = projectEntity.getTasks();
-            taskEntity.setAssignee(userThatCreatedTask);
+            taskEntity.setAssignee(userThatCreatedTask);//user that triggered creation is assigned by default
             tasks.add(taskEntity);
             projectEntity.setTasks(tasks);
             ProjectEntity savedProject = projectRepository.save(projectEntity);
@@ -69,8 +72,6 @@ public class TaskService extends BaseService {
             taskToChange.setPriority(modifiedTask.getPriority());
             taskToChange.setStatus(modifiedTask.getStatus());
             TaskEntity savedTask = taskRepository.save(taskToChange);
-            //refreshing project's data with new task information
-            projectService.updateProjectWithModifiedTaskData(correspondingProject, oldTitle, savedTask);
         } else
             throw new TaskAlreadyExistsInProjectException();
     }
@@ -80,22 +81,22 @@ public class TaskService extends BaseService {
         TaskEntity taskToDelete = getTaskFromDbById(taskId);
         ProjectEntity projectToUpdate = taskToDelete.getProject();
         if (projectToUpdate.getSupervisor().getId().equals(requestingUser.getUserId())) {//user that is deleting must be project's supervisor
-            projectService.updateProjectTasksSetByRemovingDeletedItem(projectToUpdate, taskToDelete.getTitle());
             taskRepository.delete(taskToDelete);
         } else
             throw new InsufficientPermissionException();
     }
 
     public void performTaskAssignment(String authToken, Long taskId, Long userId){
-        //can potentially assign to project that someone does not participate in, but
-        //from mobile application point of view, if user can see a task, they can assign to it, because
-        // user can see only tasks from project they are in (to fix: check if user of given userId participates in
-        // project (that can be retrieved from task.getProject()))
         authService.authenticateUserByToken(authToken);
         TaskEntity taskToUpdate = getTaskFromDbById(taskId);
-        taskToUpdate.setAssignee(userService.getUserFromDbById(userId));
+        UserEntity newAssignee = userService.getUserFromDbById(userId);
         ProjectEntity projectEntity = taskToUpdate.getProject();
-        projectService.updateProjectWithModifiedTaskData(projectEntity, taskToUpdate.getTitle(), taskToUpdate);
+        if (projectService.isUserPartOfProject(userAuthDetailsService.getUserAuthDetailsFromUserEntity(newAssignee), projectEntity)){
+            taskToUpdate.setAssignee(newAssignee);
+            projectService.updateProjectWithModifiedTaskData(projectEntity, taskToUpdate.getTitle(), taskToUpdate);
+        } else {
+            throw new UserNotPartOfProjectException();
+        }
     }
 
     private boolean isTaskAlreadyCreatedInProject(Set<TaskEntity> tasksInProject, TaskEntity taskEntity) {//validating by title

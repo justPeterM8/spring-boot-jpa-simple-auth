@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"users", "tasks"})
+@EqualsAndHashCode(exclude = {"users", "tasks", "supervisor"})
 @NoArgsConstructor
 public class ProjectEntity {
 
@@ -21,9 +21,10 @@ public class ProjectEntity {
     private UserEntity supervisor;
 
     @ManyToMany
+    @JsonIgnore
     private Set<UserEntity> users;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<TaskEntity> tasks;
 
