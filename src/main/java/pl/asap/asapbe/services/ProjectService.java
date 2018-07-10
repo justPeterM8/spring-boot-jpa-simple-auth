@@ -40,7 +40,7 @@ public class ProjectService extends BaseService {
         }
     }
 
-    public void performProjectCreation(String authToken, ProjectEntity projectEntity) {
+    public ProjectEntity performProjectCreation(String authToken, ProjectEntity projectEntity) {
         if (projectRepository.findByTitle(projectEntity.getTitle()).isPresent())//project already exsits
             throw new ProjectAlreadyExistsInDatabaseException();
         else {//project doesn't exist
@@ -50,16 +50,16 @@ public class ProjectService extends BaseService {
             usersInProject.add(supervisor);
             projectEntity.setSupervisor(supervisor);
             projectEntity.setUsers(usersInProject);
-            projectRepository.save(projectEntity);
+            return projectRepository.save(projectEntity);
         }
     }
 
-    public void performProjectModification(String authToken, Long projectId, ProjectEntity modifiedProject) {
+    public ProjectEntity performProjectModification(String authToken, Long projectId, ProjectEntity modifiedProject) {
         ProjectEntity projectToModify = getProjectFromDbById(projectId);
         UserAuthDetailsEntity modifier = authService.authenticateUserByToken(authToken);//possible supervisor or basic user
         if (modifier.getUserId().equals(projectToModify.getSupervisor().getId())) {//user is authorized to modify (only supervisor allowed to change project)
             projectToModify.setTitle(modifiedProject.getTitle());
-            projectRepository.save(projectToModify);
+            return projectRepository.save(projectToModify);
         } else
             throw new InsufficientPermissionException();
     }
@@ -81,7 +81,7 @@ public class ProjectService extends BaseService {
             return project.get();
     }
 
-    public void performAddingUserToProjectOperation(String authToken, Long projectId, Long userId) {
+    public List<UserEntity> performAddingUserToProjectOperation(String authToken, Long projectId, Long userId) {
         UserAuthDetailsEntity requestingUser = authService.authenticateUserByToken(authToken);
         ProjectEntity projectEntity = getProjectFromDbById(projectId);
         if (requestingUser.getUserId().equals(projectEntity.getSupervisor().getId())) {//only supervisor can add new members to project
@@ -89,17 +89,18 @@ public class ProjectService extends BaseService {
             Set<UserEntity> usersInProject = projectEntity.getUsers();
             usersInProject.add(userAddedToProject);
             projectEntity.setUsers(usersInProject);
-            projectRepository.save(projectEntity);
+            ProjectEntity savedProject = projectRepository.save(projectEntity);
+            return getAllUsersFromSpecificProject(authToken, savedProject.getId());
         } else
             throw new InsufficientPermissionException();
     }
 
-    public void performDeletingUserFromProjectOperation(String authToken, Long projectId, Long userId) {
+    public List<UserEntity> performDeletingUserFromProjectOperation(String authToken, Long projectId, Long userId) {
         UserAuthDetailsEntity requestingUser = authService.authenticateUserByToken(authToken);
         ProjectEntity projectEntity = getProjectFromDbById(projectId);
         if (requestingUser.getUserId().equals(projectEntity.getSupervisor().getId())) {//only supervisor can add new members to project
             UserEntity userDeletedFromProject = userService.getUserFromDbById(userId);
-            updateUsersSetByRemovingDeletedItem(projectEntity, userDeletedFromProject);
+            return new ArrayList<>(updateUsersSetByRemovingDeletedItem(projectEntity, userDeletedFromProject).getUsers());
         } else
             throw new InsufficientPermissionException();
     }
@@ -123,14 +124,14 @@ public class ProjectService extends BaseService {
         projectRepository.save(projectEntity);
     }
 
-    private void updateUsersSetByRemovingDeletedItem(ProjectEntity projectEntity, UserEntity userEntity) {
+    private ProjectEntity updateUsersSetByRemovingDeletedItem(ProjectEntity projectEntity, UserEntity userEntity) {
         Set<UserEntity> updatedUsersSet = projectEntity
                 .getUsers()
                 .stream()
                 .filter(user -> !(user.getId().equals(userEntity.getId())))
                 .collect(Collectors.toSet());
         projectEntity.setUsers(updatedUsersSet);
-        projectRepository.save(projectEntity);
+        return projectRepository.save(projectEntity);
     }
 
     boolean isUserPartOfProject(UserAuthDetailsEntity userAuthDetailsEntity, ProjectEntity projectEntity) {

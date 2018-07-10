@@ -44,7 +44,7 @@ public class TaskService extends BaseService {
         return getTaskFromDbById(taskId);
     }
 
-    public void performTaskCreation(String authToken, TaskEntity taskEntity, Long projectId) {
+    public TaskEntity performTaskCreation(String authToken, TaskEntity taskEntity, Long projectId) {
         UserAuthDetailsEntity requestingUser = authService.authenticateUserByToken(authToken);
         UserEntity userThatCreatedTask = userService.getUserEntityFromUserAuthDetailsEntity(requestingUser);
         ProjectEntity projectEntity = projectService.getProjectFromDbById(projectId);
@@ -55,23 +55,22 @@ public class TaskService extends BaseService {
             projectEntity.setTasks(tasks);
             ProjectEntity savedProject = projectRepository.save(projectEntity);
             taskEntity.setProject(savedProject);
-            taskRepository.save(taskEntity);
+            return taskRepository.save(taskEntity);
         } else
             throw new TaskAlreadyExistsInProjectException();
     }
 
-    public void performTaskModification(String authToken, TaskEntity modifiedTask, Long taskId) {
+    public TaskEntity performTaskModification(String authToken, TaskEntity modifiedTask, Long taskId) {
         authService.authenticateUserByToken(authToken);
         TaskEntity taskToChange = getTaskFromDbById(taskId);
         ProjectEntity correspondingProject = projectService.getProjectFromDbById(taskToChange.getProject().getId());
         if (!isTaskAlreadyCreatedInProject(correspondingProject.getTasks(), modifiedTask)) {//check if there is task with the same title already in this project
-            String oldTitle = taskToChange.getTitle(); //keeping old task title, to find it in project data after saving task with new information
             //refreshing task's data (without assignee change, this is handled elsewhere)
             taskToChange.setTitle(modifiedTask.getTitle());
             taskToChange.setDescription(modifiedTask.getDescription());
             taskToChange.setPriority(modifiedTask.getPriority());
             taskToChange.setStatus(modifiedTask.getStatus());
-            TaskEntity savedTask = taskRepository.save(taskToChange);
+            return taskRepository.save(taskToChange);
         } else
             throw new TaskAlreadyExistsInProjectException();
     }
@@ -86,7 +85,7 @@ public class TaskService extends BaseService {
             throw new InsufficientPermissionException();
     }
 
-    public void performTaskAssignment(String authToken, Long taskId, Long userId){
+    public TaskEntity performTaskAssignment(String authToken, Long taskId, Long userId){
         authService.authenticateUserByToken(authToken);
         TaskEntity taskToUpdate = getTaskFromDbById(taskId);
         UserEntity newAssignee = userService.getUserFromDbById(userId);
@@ -94,6 +93,7 @@ public class TaskService extends BaseService {
         if (projectService.isUserPartOfProject(userAuthDetailsService.getUserAuthDetailsFromUserEntity(newAssignee), projectEntity)){
             taskToUpdate.setAssignee(newAssignee);
             projectService.updateProjectWithModifiedTaskData(projectEntity, taskToUpdate.getTitle(), taskToUpdate);
+            return taskToUpdate;
         } else {
             throw new UserNotPartOfProjectException();
         }

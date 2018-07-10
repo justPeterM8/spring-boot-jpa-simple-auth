@@ -79,13 +79,13 @@ public class UserService extends BaseService {
             throw new UserAuthenticationException();
     }
 
-    public void performUserModification(String authToken, UserEntity changedUser) {
+    public UserEntity performUserModification(String authToken, UserEntity changedUser) {
         UserAuthDetailsEntity requestingUser = authService.authenticateUserByToken(authToken);
         UserEntity userToBeChanged = getUserEntityFromUserAuthDetailsEntity(requestingUser);
         userToBeChanged.setFirstName(changedUser.getFirstName());
         userToBeChanged.setLastName(changedUser.getLastName());
         userToBeChanged.setEmail(changedUser.getEmail());
-        userRepository.save(userToBeChanged);
+        return userRepository.save(userToBeChanged);
     }
 
     public UserDetails getUserDetails(String authToken) {

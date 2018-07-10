@@ -18,6 +18,7 @@ public class ProjectEntity {
     private String title;
 
     @OneToOne
+    @JsonIgnore
     private UserEntity supervisor;
 
     @ManyToMany

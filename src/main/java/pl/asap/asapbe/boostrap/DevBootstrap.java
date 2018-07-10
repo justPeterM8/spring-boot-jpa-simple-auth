@@ -1,5 +1,6 @@
 package pl.asap.asapbe.boostrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -16,6 +17,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 @Component
+@Slf4j
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private UserRepository userRepository;
@@ -23,7 +25,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private ProjectRepository projectRepository;
     private UserAuthDetailsRepository userAuthDetailsRepository;
     private AuthService authService;
-    private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
     @Autowired
     public DevBootstrap(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository, UserAuthDetailsRepository userAuthRepository, AuthService authService) {
@@ -66,7 +67,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         school_project.setTasks(allTasks);
 
         //saving data to database
-        logger.info("saving data to database");
+        log.info("saving data to database");
         UserEntity marekEntity = userRepository.save(marek);
         UserEntity krzysztofEntity = userRepository.save(krzysztof);
         UserEntity patrykEntity = userRepository.save(patryk);

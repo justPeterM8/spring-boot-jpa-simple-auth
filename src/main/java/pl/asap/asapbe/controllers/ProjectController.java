@@ -30,34 +30,31 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    public ResponseEntity createProject(@RequestHeader("token") String authToken,
+    public ResponseEntity<ProjectEntity> createProject(@RequestHeader("token") String authToken,
                                         @RequestBody ProjectEntity project) {
-        projectService.performProjectCreation(authToken, project);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(projectService.performProjectCreation(authToken, project));
     }
 
     @PutMapping("/projects")
-    public ResponseEntity modifyProject(@RequestHeader("token") String authToken,
+    public ResponseEntity<ProjectEntity> modifyProject(@RequestHeader("token") String authToken,
                                         @RequestParam("id") Long projectId,
                                         @RequestBody ProjectEntity project) {
-        projectService.performProjectModification(authToken, projectId, project);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return ResponseEntity.ok(projectService.performProjectModification(authToken, projectId, project));
     }
 
     @PutMapping("/projects/addUser")
-    public ResponseEntity addUserToProject(@RequestHeader("token") String authToken,
+    public ResponseEntity<List<UserEntity>> addUserToProject(@RequestHeader("token") String authToken,
                                            @RequestParam("projectId") Long projectId,
                                            @RequestParam("userId") Long userId) {
-        projectService.performAddingUserToProjectOperation(authToken, projectId, userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(projectService.performAddingUserToProjectOperation(authToken, projectId, userId));
     }
 
     @PutMapping("/projects/deleteUser")
-    public ResponseEntity deleteUserFromProject(@RequestHeader("token") String authToken,
+    public ResponseEntity<List<UserEntity>> deleteUserFromProject(@RequestHeader("token") String authToken,
                                                 @RequestParam("projectId") Long projectId,
                                                 @RequestParam("userId") Long userId) {
-        projectService.performDeletingUserFromProjectOperation(authToken, projectId, userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(projectService.performDeletingUserFromProjectOperation(authToken, projectId, userId));
     }
 
     @DeleteMapping("/projects")

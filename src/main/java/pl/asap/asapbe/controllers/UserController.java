@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserEntity> getAllUsers(@RequestHeader("token") String authToken) {
-        return userService.getListOfAllUsers(authToken);
+    public ResponseEntity<List<UserEntity>> getAllUsers(@RequestHeader("token") String authToken) {
+        return ResponseEntity.ok(userService.getListOfAllUsers(authToken));
     }
 
     @GetMapping("/users/details")
@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/login", headers = "Content-Type=application/x-www-form-urlencoded")
-    public UserAuthDetailsEntity loginUser(@RequestParam("email") String email,
-                                           @RequestParam("password") String password) {
-        return userService.performUserLogin(email, password);
+    public ResponseEntity<UserAuthDetailsEntity> loginUser(@RequestParam("email") String email,
+                                                           @RequestParam("password") String password) {
+        return ResponseEntity.ok(userService.performUserLogin(email, password));
     }
 
     @PostMapping(value = "/users/password", headers = "Content-Type=application/x-www-form-urlencoded")
@@ -45,18 +45,17 @@ public class UserController {
     }
 
     @PostMapping(value = "/users", headers = "Content-Type=application/x-www-form-urlencoded")
-    public UserAuthDetailsEntity createUser(@RequestParam("firstName") String firstName,
+    public ResponseEntity<UserAuthDetailsEntity> createUser(@RequestParam("firstName") String firstName,
                              @RequestParam("lastName") String lastName,
                              @RequestParam("email") String email,
                              @RequestParam("password") String password) {
-        return userService.performUserRegistration(firstName, lastName, email, password);
+        return ResponseEntity.ok(userService.performUserRegistration(firstName, lastName, email, password));
     }
 
     @PutMapping(value = "/users")
-    public ResponseEntity createUser(@RequestHeader("token") String authToken,
+    public ResponseEntity<UserEntity> modifyUser(@RequestHeader("token") String authToken,
                                      @RequestBody UserEntity user) {
-        userService.performUserModification(authToken, user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(userService.performUserModification(authToken, user));
     }
 
     @DeleteMapping("/users")
