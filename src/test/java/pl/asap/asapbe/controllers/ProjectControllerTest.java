@@ -10,11 +10,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.asap.asapbe.entities.ProjectEntity;
 import pl.asap.asapbe.entities.UserEntity;
-import pl.asap.asapbe.services.ProjectService;
+import pl.asap.asapbe.services.ProjectServiceImpl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -29,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProjectControllerTest {
 
     @Mock
-    ProjectService projectService;
+    ProjectServiceImpl projectServiceImpl;
 
     ProjectController projectController;
     MockMvc mockMvc;
@@ -37,7 +35,7 @@ public class ProjectControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        projectController = new ProjectController(projectService);
+        projectController = new ProjectController(projectServiceImpl);
         mockMvc = MockMvcBuilders.standaloneSetup(projectController).build();
 
     }
@@ -50,7 +48,7 @@ public class ProjectControllerTest {
         projectEntity2.setId(2L);
         List<ProjectEntity> projects = Arrays.asList(projectEntity1, projectEntity2);
 
-        when(projectService.getListOfAllProjects(anyString())).thenReturn(projects);
+        when(projectServiceImpl.getListOfAllProjects(anyString())).thenReturn(projects);
 
         mockMvc.perform(get("/projects")
                 .header("token", "134123"))
@@ -62,8 +60,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].title", is("Test project2")));
 
-        verify(projectService, times(1)).getListOfAllProjects(anyString());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).getListOfAllProjects(anyString());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -75,7 +73,7 @@ public class ProjectControllerTest {
         List<UserEntity> users = Arrays.asList(user1, user2);
 
 
-        when(projectService.getAllUsersFromSpecificProject(anyString(), anyLong())).thenReturn(users);
+        when(projectServiceImpl.getAllUsersFromSpecificProject(anyString(), anyLong())).thenReturn(users);
         mockMvc.perform(get("/projects/users")
                 .param("projectId", "1")
                 .header("token", "134123"))
@@ -91,8 +89,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$[1].lastName", is("Kostrzewa")))
                 .andExpect(jsonPath("$[1].email", is("marek_kostrzewa@gmail.com")));
 
-        verify(projectService, times(1)).getAllUsersFromSpecificProject(anyString(), anyLong());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).getAllUsersFromSpecificProject(anyString(), anyLong());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -103,7 +101,7 @@ public class ProjectControllerTest {
         Gson gson = new Gson();
         String objJson = gson.toJson(projectEntity);
 
-        when(projectService.performProjectCreation(anyString(), any())).thenReturn(projectEntity);
+        when(projectServiceImpl.performProjectCreation(anyString(), any())).thenReturn(projectEntity);
 
         mockMvc.perform(post("/projects")
                 .header("token", "134123")
@@ -114,8 +112,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test project")));
 
-        verify(projectService, times(1)).performProjectCreation(anyString(), any());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).performProjectCreation(anyString(), any());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -128,7 +126,7 @@ public class ProjectControllerTest {
         Gson gson = new Gson();
         String objJson = gson.toJson(projectEntityBody);
 
-        when(projectService.performProjectModification(anyString(), anyLong(), any())).thenReturn(projectEntityResult);
+        when(projectServiceImpl.performProjectModification(anyString(), anyLong(), any())).thenReturn(projectEntityResult);
 
         mockMvc.perform(put("/projects")
                 .header("token", "134123")
@@ -140,8 +138,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test project")));
 
-        verify(projectService, times(1)).performProjectModification(anyString(), anyLong(), any());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).performProjectModification(anyString(), anyLong(), any());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -152,7 +150,7 @@ public class ProjectControllerTest {
         user2.setId(2L);
 
         List<UserEntity> usersInProject = Arrays.asList(user1, user2);
-        when(projectService.performAddingUserToProjectOperation(anyString(), anyLong(), anyLong())).thenReturn(usersInProject);
+        when(projectServiceImpl.performAddingUserToProjectOperation(anyString(), anyLong(), anyLong())).thenReturn(usersInProject);
 
         mockMvc.perform(put("/projects/addUser")
                 .header("token", "134123")
@@ -169,8 +167,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$[1].lastName", is("Kostrzewa")))
                 .andExpect(jsonPath("$[1].email", is("marek_kostrzewa@gmail.com")));
 
-        verify(projectService, times(1)).performAddingUserToProjectOperation(anyString(), anyLong(), anyLong());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).performAddingUserToProjectOperation(anyString(), anyLong(), anyLong());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -181,7 +179,7 @@ public class ProjectControllerTest {
         user2.setId(2L);
 
         List<UserEntity> usersInProject = Arrays.asList(user1, user2);
-        when(projectService.performDeletingUserFromProjectOperation(anyString(), anyLong(), anyLong())).thenReturn(usersInProject);
+        when(projectServiceImpl.performDeletingUserFromProjectOperation(anyString(), anyLong(), anyLong())).thenReturn(usersInProject);
 
         mockMvc.perform(put("/projects/deleteUser")
                 .header("token", "134123")
@@ -198,8 +196,8 @@ public class ProjectControllerTest {
                 .andExpect(jsonPath("$[1].lastName", is("Kostrzewa")))
                 .andExpect(jsonPath("$[1].email", is("marek_kostrzewa@gmail.com")));
 
-        verify(projectService, times(1)).performDeletingUserFromProjectOperation(anyString(), anyLong(), anyLong());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).performDeletingUserFromProjectOperation(anyString(), anyLong(), anyLong());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 
     @Test
@@ -209,8 +207,8 @@ public class ProjectControllerTest {
                 .param("id", "1"))
                 .andExpect(status().isOk());
 
-        verify(projectService, times(1)).performProjectDeletion(anyString(), anyLong());
-        verifyNoMoreInteractions(projectService);
+        verify(projectServiceImpl, times(1)).performProjectDeletion(anyString(), anyLong());
+        verifyNoMoreInteractions(projectServiceImpl);
     }
 }
 

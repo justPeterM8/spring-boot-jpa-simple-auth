@@ -10,11 +10,10 @@ import pl.asap.asapbe.repositories.ProjectRepository;
 import pl.asap.asapbe.repositories.TaskRepository;
 import pl.asap.asapbe.repositories.UserAuthDetailsRepository;
 import pl.asap.asapbe.repositories.UserRepository;
-import pl.asap.asapbe.services.AuthService;
+import pl.asap.asapbe.services.AuthServiceImpl;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 @Component
 @Slf4j
@@ -24,29 +23,29 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private TaskRepository taskRepository;
     private ProjectRepository projectRepository;
     private UserAuthDetailsRepository userAuthDetailsRepository;
-    private AuthService authService;
+    private AuthServiceImpl authServiceImpl;
 
     @Autowired
-    public DevBootstrap(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository, UserAuthDetailsRepository userAuthRepository, AuthService authService) {
+    public DevBootstrap(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository, UserAuthDetailsRepository userAuthRepository, AuthServiceImpl authServiceImpl) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.projectRepository = projectRepository;
         this.userAuthDetailsRepository = userAuthRepository;
-        this.authService = authService;
+        this.authServiceImpl = authServiceImpl;
     }
 
     private void init() {
 
         //school project
         ProjectEntity school_project = new ProjectEntity("School project");
-        UserEntity marek = new UserEntity("Marek", "Kowalski", "marek_kowalski@gmail.com", authService.encryptPassword("qwerty123"));
-        UserEntity krzysztof = new UserEntity("Krzysztof", "Nowak", "krzysztof_nowak@gmail.com", authService.encryptPassword("password321"));
-        UserEntity patryk = new UserEntity("Patryk", "Kopiec", "patryk_kopiec@gmail.com", authService.encryptPassword("password123"));
+        UserEntity marek = new UserEntity("Marek", "Kowalski", "marek_kowalski@gmail.com", authServiceImpl.encryptPassword("qwerty123"));
+        UserEntity krzysztof = new UserEntity("Krzysztof", "Nowak", "krzysztof_nowak@gmail.com", authServiceImpl.encryptPassword("password321"));
+        UserEntity patryk = new UserEntity("Patryk", "Kopiec", "patryk_kopiec@gmail.com", authServiceImpl.encryptPassword("password123"));
         TaskEntity taskInitRepo = new TaskEntity("Init repository", "Create repository and create corresponding project", Status.OPEN, Priority.HIGH);
         TaskEntity taskCreateDb = new TaskEntity("createDatabase", "Create database and Entity classes", Status.OPEN, Priority.HIGH);
-        UserAuthDetailsEntity marekUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
-        UserAuthDetailsEntity krzysztofUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
-        UserAuthDetailsEntity patrykUserAuthDetails = new UserAuthDetailsEntity(authService.generateToken());
+        UserAuthDetailsEntity marekUserAuthDetails = new UserAuthDetailsEntity(authServiceImpl.generateToken());
+        UserAuthDetailsEntity krzysztofUserAuthDetails = new UserAuthDetailsEntity(authServiceImpl.generateToken());
+        UserAuthDetailsEntity patrykUserAuthDetails = new UserAuthDetailsEntity(authServiceImpl.generateToken());
 
         //binding tasks with users
         taskInitRepo.setAssignee(krzysztof);

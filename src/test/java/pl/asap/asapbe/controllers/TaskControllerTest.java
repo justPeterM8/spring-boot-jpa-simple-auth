@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.asap.asapbe.entities.*;
-import pl.asap.asapbe.services.TaskService;
+import pl.asap.asapbe.services.TaskServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TaskControllerTest {
 
     @Mock
-    TaskService taskService;
+    TaskServiceImpl taskServiceImpl;
 
     TaskController taskController;
     MockMvc mockMvc;
@@ -34,7 +34,7 @@ public class TaskControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        taskController = new TaskController(taskService);
+        taskController = new TaskController(taskServiceImpl);
         mockMvc = MockMvcBuilders.standaloneSetup(taskController).build();
     }
 
@@ -47,7 +47,7 @@ public class TaskControllerTest {
 
         List<TaskEntity> tasks = Arrays.asList(task1, task2);
 
-        when(taskService.getAllTasksFromProject(anyString(), anyLong())).thenReturn(tasks);
+        when(taskServiceImpl.getAllTasksFromProject(anyString(), anyLong())).thenReturn(tasks);
 
         mockMvc.perform(get("/tasks")
                 .header("token", "134123")
@@ -66,8 +66,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[1].status", is("DONE")))
                 .andExpect(jsonPath("$[1].priority", is("LOW")));
 
-        verify(taskService, times(1)).getAllTasksFromProject(anyString(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).getAllTasksFromProject(anyString(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class TaskControllerTest {
         TaskEntity task1 = new TaskEntity("Test title", "Test description", Status.OPEN, Priority.HIGH);
         task1.setId(1L);
 
-        when(taskService.getTaskById(anyString(), anyLong())).thenReturn(task1);
+        when(taskServiceImpl.getTaskById(anyString(), anyLong())).thenReturn(task1);
 
         mockMvc.perform(get("/tasks/task")
                 .header("token", "134123")
@@ -88,8 +88,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.status", is("OPEN")))
                 .andExpect(jsonPath("$.priority", is("HIGH")));
 
-        verify(taskService, times(1)).getTaskById(anyString(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).getTaskById(anyString(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class TaskControllerTest {
         Gson gson = new Gson();
         String jsonObj = gson.toJson(task1);
 
-        when(taskService.performTaskCreation(anyString(), any(), anyLong())).thenReturn(task1);
+        when(taskServiceImpl.performTaskCreation(anyString(), any(), anyLong())).thenReturn(task1);
 
         mockMvc.perform(post("/tasks")
                 .header("token", "134123")
@@ -115,8 +115,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.status", is("OPEN")))
                 .andExpect(jsonPath("$.priority", is("HIGH")));
 
-        verify(taskService, times(1)).performTaskCreation(anyString(), any(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).performTaskCreation(anyString(), any(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 
     @Test
@@ -128,7 +128,7 @@ public class TaskControllerTest {
         Gson gson = new Gson();
         String jsonObj = gson.toJson(taskBody);
 
-        when(taskService.performTaskModification(anyString(), any(), anyLong())).thenReturn(taskResult);
+        when(taskServiceImpl.performTaskModification(anyString(), any(), anyLong())).thenReturn(taskResult);
 
         mockMvc.perform(put("/tasks")
                 .header("token", "134123")
@@ -143,8 +143,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.status", is("OPEN")))
                 .andExpect(jsonPath("$.priority", is("HIGH")));
 
-        verify(taskService, times(1)).performTaskModification(anyString(), any(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).performTaskModification(anyString(), any(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 
     @Test
@@ -155,7 +155,7 @@ public class TaskControllerTest {
         task1.setId(1L);
         task1.setAssignee(user1);
 
-        when(taskService.performTaskAssignment(anyString(), anyLong(), anyLong())).thenReturn(task1);
+        when(taskServiceImpl.performTaskAssignment(anyString(), anyLong(), anyLong())).thenReturn(task1);
 
         mockMvc.perform(put("/tasks/assign")
                 .header("token", "134123")
@@ -169,8 +169,8 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.assignee.lastName", is("Kowalski")))
                 .andExpect(jsonPath("$.assignee.email", is("jan_kowalski@gmail.com")));
 
-        verify(taskService, times(1)).performTaskAssignment(anyString(), anyLong(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).performTaskAssignment(anyString(), anyLong(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 
     @Test
@@ -180,7 +180,7 @@ public class TaskControllerTest {
                 .param("taskId", "1"))
                 .andExpect(status().isOk());
 
-        verify(taskService, times(1)).performTaskDeletion(anyString(), anyLong());
-        verifyNoMoreInteractions(taskService);
+        verify(taskServiceImpl, times(1)).performTaskDeletion(anyString(), anyLong());
+        verifyNoMoreInteractions(taskServiceImpl);
     }
 }

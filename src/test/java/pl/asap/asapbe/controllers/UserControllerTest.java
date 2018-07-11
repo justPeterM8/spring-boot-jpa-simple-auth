@@ -8,19 +8,16 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import pl.asap.asapbe.entities.ProjectEntity;
 import pl.asap.asapbe.entities.UserAuthDetailsEntity;
 import pl.asap.asapbe.entities.UserEntity;
 import pl.asap.asapbe.response_model.UserDetails;
-import pl.asap.asapbe.services.UserService;
+import pl.asap.asapbe.services.UserServiceImpl;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -31,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest {
 
     @Mock
-    UserService userService;
+    UserServiceImpl userServiceImpl;
 
     UserController userController;
     MockMvc mockMvc;
@@ -39,7 +36,7 @@ public class UserControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        userController = new UserController(userService);
+        userController = new UserController(userServiceImpl);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
@@ -51,7 +48,7 @@ public class UserControllerTest {
         user2.setId(2L);
         List<UserEntity> users = Arrays.asList(user1, user2);
 
-        when(userService.getListOfAllUsers(anyString())).thenReturn(users);
+        when(userServiceImpl.getListOfAllUsers(anyString())).thenReturn(users);
 
         mockMvc.perform(get("/users")
                 .header("token", "134123"))
@@ -67,15 +64,15 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[1].lastName", is("Kostrzewa")))
                 .andExpect(jsonPath("$[1].email", is("marek_kostrzewa@gmail.com")));
 
-        verify(userService, times(1)).getListOfAllUsers(anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).getListOfAllUsers(anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
     public void testGetUserDetails() throws Exception {
         UserDetails userDetails = new UserDetails("Jan", "Kowalski");
 
-        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(userServiceImpl.getUserDetails(anyString())).thenReturn(userDetails);
 
         mockMvc.perform(get("/users/details")
                 .header("token", "134123"))
@@ -84,15 +81,15 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.firstName", is("Jan")))
                 .andExpect(jsonPath("$.lastName", is("Kowalski")));
 
-        verify(userService, times(1)).getUserDetails(anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).getUserDetails(anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
     public void testLoginUser() throws Exception {
         UserAuthDetailsEntity userAuthDetailsEntity = new UserAuthDetailsEntity(1L, "1231-123-123");
 
-        when(userService.performUserLogin(anyString(), anyString())).thenReturn(userAuthDetailsEntity);
+        when(userServiceImpl.performUserLogin(anyString(), anyString())).thenReturn(userAuthDetailsEntity);
 
         mockMvc.perform(post("/users/login")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -104,8 +101,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.userId", is(1)))
                 .andExpect(jsonPath("$.token", is("1231-123-123")));
 
-        verify(userService, times(1)).performUserLogin(anyString(), anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).performUserLogin(anyString(), anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
@@ -119,15 +116,15 @@ public class UserControllerTest {
                 .param("newPassword", "test_new_passsword"))
                 .andExpect(status().isOk());
 
-        verify(userService, times(1)).performUserPasswordChangeOperation(anyString(), anyString(), anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).performUserPasswordChangeOperation(anyString(), anyString(), anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
     public void testCreateUser() throws Exception {
         UserAuthDetailsEntity userAuthDetailsEntity = new UserAuthDetailsEntity(1L, "1231-123-123");
 
-        when(userService.performUserRegistration(anyString(), anyString(), anyString(), anyString())).thenReturn(userAuthDetailsEntity);
+        when(userServiceImpl.performUserRegistration(anyString(), anyString(), anyString(), anyString())).thenReturn(userAuthDetailsEntity);
 
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -141,8 +138,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.userId", is(1)))
                 .andExpect(jsonPath("$.token", is("1231-123-123")));
 
-        verify(userService, times(1)).performUserRegistration(anyString(), anyString(), anyString(), anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).performUserRegistration(anyString(), anyString(), anyString(), anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
@@ -153,7 +150,7 @@ public class UserControllerTest {
         Gson gson = new Gson();
         String jsonObj = gson.toJson(user1);
 
-        when(userService.performUserModification(anyString(), any())).thenReturn(user1);
+        when(userServiceImpl.performUserModification(anyString(), any())).thenReturn(user1);
 
         mockMvc.perform(put("/users")
                 .header("token", "134123")
@@ -166,8 +163,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.lastName", is("Kowalski")))
                 .andExpect(jsonPath("$.email", is("jan_kowalski@gmail.com")));
 
-        verify(userService, times(1)).performUserModification(anyString(), any());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).performUserModification(anyString(), any());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 
     @Test
@@ -176,7 +173,7 @@ public class UserControllerTest {
                 .header("token", "134123"))
                 .andExpect(status().isOk());
 
-        verify(userService, times(1)).performUserDeletion(anyString());
-        verifyNoMoreInteractions(userService);
+        verify(userServiceImpl, times(1)).performUserDeletion(anyString());
+        verifyNoMoreInteractions(userServiceImpl);
     }
 }
