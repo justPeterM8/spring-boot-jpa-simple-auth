@@ -2,13 +2,9 @@ package pl.asap.asapbe.services;
 
 import pl.asap.asapbe.entities.UserAuthDetailsEntity;
 import pl.asap.asapbe.entities.UserEntity;
-import pl.asap.asapbe.exceptions.EmailAlreadyExistsInDatabaseException;
-import pl.asap.asapbe.exceptions.UserAuthenticationException;
-import pl.asap.asapbe.exceptions.UserNotFoundException;
 import pl.asap.asapbe.response_model.UserDetails;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 

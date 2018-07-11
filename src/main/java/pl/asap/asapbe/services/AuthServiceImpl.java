@@ -10,21 +10,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @Service
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
-    private UserAuthDetailsRepository userAuthDetailsRepository;
-    private UserAuthDetailsService userAuthDetailsService;
+    private final UserAuthDetailsRepository userAuthDetailsRepository;
 
     @Autowired
-    public AuthServiceImpl(UserAuthDetailsRepository userAuthDetailsRepository, UserAuthDetailsService userAuthDetailsService) {
+    public AuthServiceImpl(UserAuthDetailsRepository userAuthDetailsRepository) {
         this.userAuthDetailsRepository = userAuthDetailsRepository;
-        this.userAuthDetailsService = userAuthDetailsService;
     }
-
-    private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
      public UserAuthDetailsEntity authenticateUserByToken(String authToken) {
         Optional<UserAuthDetailsEntity> userDetailsOptional = userAuthDetailsRepository.findByToken(authToken);

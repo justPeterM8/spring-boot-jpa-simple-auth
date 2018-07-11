@@ -21,12 +21,12 @@ import java.util.Set;
 @Service
 public class TaskServiceImpl implements TaskService{
 
-    private ProjectServiceImpl projectServiceImpl;
-    private UserServiceImpl userServiceImpl;
-    private UserAuthDetailsServiceImpl userAuthDetailsServiceImpl;
-    private AuthServiceImpl authServiceImpl;
-    private ProjectRepository projectRepository;
-    private TaskRepository taskRepository;
+    private final ProjectServiceImpl projectServiceImpl;
+    private final UserServiceImpl userServiceImpl;
+    private final UserAuthDetailsServiceImpl userAuthDetailsServiceImpl;
+    private final AuthServiceImpl authServiceImpl;
+    private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
     public TaskServiceImpl(ProjectServiceImpl projectServiceImpl, UserServiceImpl userServiceImpl, UserAuthDetailsServiceImpl userAuthDetailsServiceImpl, AuthServiceImpl authServiceImpl, ProjectRepository projectRepository, TaskRepository taskRepository) {

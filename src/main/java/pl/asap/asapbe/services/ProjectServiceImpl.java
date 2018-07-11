@@ -1,5 +1,6 @@
 package pl.asap.asapbe.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.asap.asapbe.entities.ProjectEntity;
@@ -16,6 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ProjectServiceImpl implements ProjectService{
     private final UserServiceImpl userServiceImpl;
     private final AuthServiceImpl authServiceImpl;
@@ -36,8 +38,8 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     public List<UserEntity> getAllUsersFromSpecificProject(String authToken, Long projectId) {
-        ProjectEntity projectToGetUsersFrom = getProjectFromDbById(projectId);
         UserAuthDetailsEntity userRequesting = authServiceImpl.authenticateUserByToken(authToken);//possible users from project and outside project
+        ProjectEntity projectToGetUsersFrom = getProjectFromDbById(projectId);
         if (isUserPartOfProject(userRequesting, projectToGetUsersFrom)) {
             return new ArrayList<>(projectToGetUsersFrom.getUsers());
         } else {
@@ -92,6 +94,7 @@ public class ProjectServiceImpl implements ProjectService{
         if (requestingUser.getUserId().equals(projectEntity.getSupervisor().getId())) {//only supervisor can add new members to project
             UserEntity userAddedToProject = userServiceImpl.getUserFromDbById(userId);
             Set<UserEntity> usersInProject = projectEntity.getUsers();
+            log.debug(projectEntity.toString());
             usersInProject.add(userAddedToProject);
             projectEntity.setUsers(usersInProject);
             ProjectEntity savedProject = projectRepository.save(projectEntity);

@@ -24,7 +24,7 @@ public class AuthServiceImplTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        authServiceImpl = new AuthServiceImpl(userAuthDetailsRepository, userAuthDetailsService);
+        authServiceImpl = new AuthServiceImpl(userAuthDetailsRepository);
     }
 
     @Test
