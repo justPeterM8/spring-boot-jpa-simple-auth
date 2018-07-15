@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.asap.asapbe.entities.ProjectEntity;
-import pl.asap.asapbe.entities.UserAuthDetailsEntity;
-import pl.asap.asapbe.entities.UserEntity;
+import pl.asap.asapbe.entities.*;
 import pl.asap.asapbe.exceptions.InsufficientPermissionException;
 import pl.asap.asapbe.exceptions.NoSuchProjectException;
 import pl.asap.asapbe.exceptions.ProjectAlreadyExistsInDatabaseException;
@@ -394,7 +392,7 @@ public class ProjectServiceImplTest {
         when(userServiceImpl.getUserFromDbById(anyLong())).thenReturn(user2);//user to delete
 
         projectServiceImpl.performDeletingUserFromProjectOperation("1231-123-123", 1L, 1L);
-        //Should throw exception related to state where user performing adding another user to project has insufficient permission
+        //Should throw exception related to state where user performing deleting another user to project has insufficient permission
 
         verify(authServiceImpl, times(1)).authenticateUserByToken(anyString());
         verify(projectRepository, times(1)).findById(anyLong());
@@ -404,13 +402,110 @@ public class ProjectServiceImplTest {
 
     @Test
     public void testUpdateProjectWithModifiedTaskData() {
+        TaskEntity taskBeforeModification = new TaskEntity("Test task", "Description for test task", Status.OPEN, Priority.HIGH);
+
+        Set<TaskEntity> tasksBeforeChange = new HashSet<>();
+        tasksBeforeChange.add(taskBeforeModification);
+
+        TaskEntity taskAfterModification = new TaskEntity("Test task", "New description after change", Status.IN_TESTS, Priority.NORMAL);
+
+        ProjectEntity projectBeforeChange = new ProjectEntity("Test project");
+        projectBeforeChange.setId(1L);
+        projectBeforeChange.setTasks(tasksBeforeChange);
+
+        projectServiceImpl.updateProjectWithModifiedTaskData(projectBeforeChange, taskBeforeModification.getTitle(), taskAfterModification);
+
+        verify(projectRepository, times(1)).save(any(ProjectEntity.class));
     }
 
     @Test
     public void testUpdateProjectTasksSetByRemovingDeletedItem() {
+        TaskEntity taskToDelete = new TaskEntity("Test task", "Description for test task", Status.OPEN, Priority.HIGH);
+
+        Set<TaskEntity> tasksBeforeChange = new HashSet<>();
+        tasksBeforeChange.add(taskToDelete);
+
+        ProjectEntity projectToUpdate = new ProjectEntity("Test project");
+        projectToUpdate.setId(1L);
+        projectToUpdate.setTasks(tasksBeforeChange);
+
+        projectServiceImpl.updateProjectTasksSetByRemovingDeletedItem(projectToUpdate, taskToDelete.getTitle());
+
+        verify(projectRepository, times(1)).save(any(ProjectEntity.class));
     }
 
     @Test
-    public void testIsUserPartOfProject() {
+    public void testUpdateUsersSetByRemovingDeletedItem(){
+        UserEntity userToDelete = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "pass");
+        userToDelete.setId(1L);
+
+        UserEntity user2 = new UserEntity("Tomasz", "Kostrzewa", "tomasz_kostrzewa@gmail.com", "pass123");
+        user2.setId(2L);
+
+        Set<UserEntity> usersBeforeChange = new HashSet<>();
+        usersBeforeChange.add(userToDelete);
+        usersBeforeChange.add(user2);
+
+        Set<UserEntity> usersChanged = new HashSet<>();
+        usersChanged.add(userToDelete);
+
+        ProjectEntity projectToUpdate = new ProjectEntity("Test project");
+        projectToUpdate.setId(1L);
+        projectToUpdate.setUsers(usersBeforeChange);
+
+        ProjectEntity projectUpdated = new ProjectEntity("Test project");
+        projectUpdated.setId(1L);
+        projectUpdated.setUsers(usersChanged);
+
+        when(projectRepository.save(any())).thenReturn(projectUpdated);
+
+        ProjectEntity projectReturned = projectServiceImpl.updateUsersSetByRemovingDeletedItem(projectToUpdate, userToDelete);
+        assertNotNull(projectReturned);
+        assertEquals(projectUpdated, projectReturned);
+
+        verify(projectRepository, times(1)).save(any(ProjectEntity.class));
+    }
+
+    @Test
+    public void testIsUserPartOfProjectPositive() {
+        UserAuthDetailsEntity userAuthDetailsEntity = new UserAuthDetailsEntity(1L, "1231-123-123");
+
+        UserEntity user1 = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "pass");
+        user1.setId(1L);
+        UserEntity user2 = new UserEntity("Tomasz", "Kostrzewa", "tomasz_kostrzewa@gmail.com", "pass123");
+        user2.setId(2L);
+
+        Set<UserEntity> users = new HashSet<>();
+        users.add(user1);
+        users.add(user2);
+
+        ProjectEntity project = new ProjectEntity("Test project");
+        project.setId(1L);
+        project.setUsers(users);
+
+        Boolean userParticipating = projectServiceImpl.isUserPartOfProject(userAuthDetailsEntity, project);
+
+        assertNotNull(userParticipating);
+        assertEquals(true, userParticipating);
+    }
+
+    @Test
+    public void testIsUserPartOfProjectNegative() {
+        UserAuthDetailsEntity userAuthDetailsEntity = new UserAuthDetailsEntity(1L, "1231-123-123");
+
+        UserEntity user2 = new UserEntity("Tomasz", "Kostrzewa", "tomasz_kostrzewa@gmail.com", "pass123");
+        user2.setId(2L);
+
+        Set<UserEntity> users = new HashSet<>();
+        users.add(user2);
+
+        ProjectEntity project = new ProjectEntity("Test project");
+        project.setId(1L);
+        project.setUsers(users);
+
+        Boolean userParticipating = projectServiceImpl.isUserPartOfProject(userAuthDetailsEntity, project);
+
+        assertNotNull(userParticipating);
+        assertEquals(false, userParticipating);
     }
 }

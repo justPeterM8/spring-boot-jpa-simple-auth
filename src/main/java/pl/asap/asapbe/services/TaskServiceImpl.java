@@ -1,15 +1,13 @@
 package pl.asap.asapbe.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.asap.asapbe.entities.ProjectEntity;
 import pl.asap.asapbe.entities.TaskEntity;
 import pl.asap.asapbe.entities.UserAuthDetailsEntity;
 import pl.asap.asapbe.entities.UserEntity;
-import pl.asap.asapbe.exceptions.InsufficientPermissionException;
-import pl.asap.asapbe.exceptions.NoSuchTaskException;
-import pl.asap.asapbe.exceptions.TaskAlreadyExistsInProjectException;
-import pl.asap.asapbe.exceptions.UserNotPartOfProjectException;
+import pl.asap.asapbe.exceptions.*;
 import pl.asap.asapbe.repositories.ProjectRepository;
 import pl.asap.asapbe.repositories.TaskRepository;
 
@@ -19,6 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class TaskServiceImpl implements TaskService{
 
     private final ProjectServiceImpl projectServiceImpl;
@@ -48,8 +47,10 @@ public class TaskServiceImpl implements TaskService{
     }
 
     public TaskEntity getTaskById(String authToken, Long taskId) {
-        authServiceImpl.authenticateUserByToken(authToken);
-        return getTaskFromDbById(taskId);
+        if (authServiceImpl.authenticateUserByToken(authToken) != null)
+            return getTaskFromDbById(taskId);
+        else
+            throw new UserAuthenticationException();
     }
 
     public TaskEntity performTaskCreation(String authToken, TaskEntity taskEntity, Long projectId) {
@@ -110,7 +111,8 @@ public class TaskServiceImpl implements TaskService{
     public boolean isTaskAlreadyCreatedInProject(Set<TaskEntity> tasksInProject, TaskEntity taskEntity) {//validating by title
         return tasksInProject
                 .stream()
-                .anyMatch(projectTask -> projectTask.getTitle().equals(taskEntity.getTitle()));
+                .anyMatch(projectTask -> projectTask.getTitle().equals(taskEntity.getTitle()) && !(projectTask.getId().equals(taskEntity.getId())));
+
     }
 
     public TaskEntity getTaskFromDbById(Long id) {
@@ -119,5 +121,6 @@ public class TaskServiceImpl implements TaskService{
             return taskEntity.get();
         } else
             throw new NoSuchTaskException();
+
     }
 }
