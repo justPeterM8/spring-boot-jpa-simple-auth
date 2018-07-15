@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e20d4d78-90b2-491d-87f6-44897c233bb1" name="Default" comment="Tests for ProjectService and related code refactors">
-      <change afterPath="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/TaskServiceImplTest.java" afterDir="false" />
+    <list default="true" id="e20d4d78-90b2-491d-87f6-44897c233bb1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserAuthDetailsServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/ProjectServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/ProjectServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -21,30 +22,33 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf>
-            <file leaf-file-name="TaskServiceImpl.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java">
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="TaskServiceImplTest.java" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/TaskServiceImplTest.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="497">
-                    <caret line="110" column="126" selection-start-line="110" selection-start-column="126" selection-end-line="110" selection-end-column="126" />
+                  <state relative-caret-position="-989">
+                    <caret line="167" column="45" lean-forward="true" selection-start-line="165" selection-start-column="8" selection-end-line="167" selection-end-column="45" />
+                    <folding>
+                      <element signature="imports" expanded="true" />
+                    </folding>
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="ProjectServiceImplTest.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/ProjectServiceImplTest.java">
+            <file leaf-file-name="UserAuthDetailsServiceImpl.java" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserAuthDetailsServiceImpl.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1">
-                    <caret line="371" column="1" lean-forward="true" selection-start-line="371" selection-start-column="1" selection-end-line="371" selection-end-column="1" />
+                  <state relative-caret-position="221">
+                    <caret line="19" column="65" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="65" />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="ProjectServiceImpl.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/ProjectServiceImpl.java">
+            <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="681">
-                    <caret line="144" column="114" selection-start-line="144" selection-start-column="114" selection-end-line="144" selection-end-column="114" />
+                  <state relative-caret-position="499">
+                    <caret line="111" column="37" lean-forward="true" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
                   </state>
                 </provider>
               </entry>
@@ -61,23 +65,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TaskServiceImplTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/TaskServiceImplTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-910">
-              <caret line="193" column="51" selection-start-line="193" selection-start-column="51" selection-end-line="193" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TaskEntity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/TaskEntity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="10" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserAuthDetailsServiceImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserAuthDetailsServiceImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceImplTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserServiceImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="730">
+              <caret line="391" column="36" selection-start-line="391" selection-start-column="36" selection-end-line="391" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -115,6 +125,7 @@
       <find>tasken</find>
       <find>log</find>
       <find>userEn</find>
+      <find>project</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -556,7 +567,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserAuthDetailsEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/Status.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/Priority.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/repositories/ProjectRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/repositories/UserAuthDetailsRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/exceptions/UserNotParticipatingInProjectException.java" />
@@ -576,7 +586,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/ProjectService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserAuthDetailsService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserAuthDetailsServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/AuthService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserService.java" />
@@ -587,6 +596,10 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/ProjectServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/TaskServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserAuthDetailsServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserServiceImplTest.java" />
       </list>
     </option>
   </component>
@@ -613,6 +626,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -714,8 +729,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -737,12 +750,12 @@
       <recent name="pl.asap.asapbe.services" />
       <recent name="pl.asap.asapbe.controllers" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="pl.asap.asapbe.services" />
       <recent name="pl.asap.asapbe.exceptions" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -757,7 +770,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.pl.asap.asapbe.controllers in spring-boot-jpa-simple-auth_test">
+  <component name="RunManager" selected="JUnit.UserAuthDetailsServiceImplTest">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -769,7 +782,7 @@
       <option name="VM_PARAMETERS" value="--add-modules java.xml.bind" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     </configuration>
-    <configuration name="AuthServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserAuthDetailsServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot-jpa-simple-auth_test" />
       <extension name="coverage">
         <pattern>
@@ -780,7 +793,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="pl.asap.asapbe.services" />
-      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.AuthServiceImplTest" />
+      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.UserAuthDetailsServiceImplTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -792,7 +805,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ProjectServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot-jpa-simple-auth_test" />
       <extension name="coverage">
         <pattern>
@@ -803,7 +816,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="pl.asap.asapbe.services" />
-      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.ProjectServiceImplTest" />
+      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.UserServiceImplTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -815,7 +828,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TaskServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceImplTest.testGetUserDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot-jpa-simple-auth_test" />
       <extension name="coverage">
         <pattern>
@@ -826,9 +839,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="pl.asap.asapbe.services" />
-      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.TaskServiceImplTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetUserDetails" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -838,7 +851,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceImplTest.testGetUserFromDbById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot-jpa-simple-auth_test" />
       <extension name="coverage">
         <pattern>
@@ -849,8 +862,31 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="pl.asap.asapbe.services" />
-      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.TaskServiceImplTest" />
-      <option name="METHOD_NAME" value="testPerformTaskCreationFailure" />
+      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetUserFromDbById" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="UserServiceImplTest.testGetUserFromDbByIdFailure" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-jpa-simple-auth_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.asap.asapbe.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="pl.asap.asapbe.services" />
+      <option name="MAIN_CLASS_NAME" value="pl.asap.asapbe.services.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetUserFromDbByIdFailure" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -868,29 +904,6 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="pl.asap.asapbe.controllers in spring-boot-jpa-simple-auth_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="spring-boot-jpa-simple-auth_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.asap.asapbe.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pl.asap.asapbe.controllers" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -929,19 +942,19 @@
     <list>
       <item itemvalue="Application.standard" />
       <item itemvalue="Spring Boot.AsapBeApplication" />
-      <item itemvalue="JUnit.TaskServiceImplTest" />
-      <item itemvalue="JUnit.TaskServiceImplTest.testPerformTaskCreationFailure" />
-      <item itemvalue="JUnit.ProjectServiceImplTest" />
-      <item itemvalue="JUnit.AuthServiceImplTest" />
-      <item itemvalue="JUnit.pl.asap.asapbe.controllers in spring-boot-jpa-simple-auth_test" />
+      <item itemvalue="JUnit.UserServiceImplTest.testGetUserDetails" />
+      <item itemvalue="JUnit.UserServiceImplTest.testGetUserFromDbById" />
+      <item itemvalue="JUnit.UserServiceImplTest.testGetUserFromDbByIdFailure" />
+      <item itemvalue="JUnit.UserServiceImplTest" />
+      <item itemvalue="JUnit.UserAuthDetailsServiceImplTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.pl.asap.asapbe.controllers in spring-boot-jpa-simple-auth_test" />
-        <item itemvalue="JUnit.AuthServiceImplTest" />
-        <item itemvalue="JUnit.ProjectServiceImplTest" />
-        <item itemvalue="JUnit.TaskServiceImplTest" />
-        <item itemvalue="JUnit.TaskServiceImplTest.testPerformTaskCreationFailure" />
+        <item itemvalue="JUnit.UserAuthDetailsServiceImplTest" />
+        <item itemvalue="JUnit.UserServiceImplTest" />
+        <item itemvalue="JUnit.UserServiceImplTest.testGetUserFromDbByIdFailure" />
+        <item itemvalue="JUnit.UserServiceImplTest.testGetUserFromDbById" />
+        <item itemvalue="JUnit.UserServiceImplTest.testGetUserDetails" />
       </list>
     </recent_temporary>
   </component>
@@ -978,6 +991,7 @@
       <workItem from="1531403689106" duration="602000" />
       <workItem from="1531416962212" duration="984000" />
       <workItem from="1531488480952" duration="19603000" />
+      <workItem from="1531641429662" duration="12912000" />
     </task>
     <task id="LOCAL-00001" summary="Controllers refactor plus tests for controllers">
       <created>1531236164892</created>
@@ -1000,43 +1014,50 @@
       <option name="project" value="LOCAL" />
       <updated>1531343637943</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Tests for TaskService and related refactors">
+      <created>1531641521946</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1531641521946</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationSuccess - 2018.07.14 at 00h 39m 30s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationSuccess" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testPerformUserModification - 2018.07.15 at 15h 05m 44s.xml">
+      <configuration name="UserServiceImplTest.testPerformUserModification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationFailure - 2018.07.14 at 00h 41m 13s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserDetails - 2018.07.15 at 15h 08m 30s.xml">
+      <configuration name="UserServiceImplTest.testGetUserDetails" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationFailure - 2018.07.14 at 00h 41m 58s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserDetails - 2018.07.15 at 15h 10m 48s.xml">
+      <configuration name="UserServiceImplTest.testGetUserDetails" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationFailure - 2018.07.14 at 00h 43m 11s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserDetails - 2018.07.15 at 15h 11m 14s.xml">
+      <configuration name="UserServiceImplTest.testGetUserDetails" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationFailure - 2018.07.14 at 00h 49m 42s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserFromDbById - 2018.07.15 at 15h 15m 38s.xml">
+      <configuration name="UserServiceImplTest.testGetUserFromDbById" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest_testPerformTaskCreationFailure - 2018.07.14 at 00h 49m 55s.xml">
-      <configuration name="TaskServiceImplTest.testPerformTaskCreationFailure" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserFromDbById - 2018.07.15 at 15h 17m 11s.xml">
+      <configuration name="UserServiceImplTest.testGetUserFromDbById" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TaskServiceImplTest - 2018.07.14 at 00h 50m 03s.xml">
-      <configuration name="TaskServiceImplTest" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserFromDbByIdFailure - 2018.07.15 at 15h 20m 50s.xml">
+      <configuration name="UserServiceImplTest.testGetUserFromDbByIdFailure" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ProjectServiceImplTest - 2018.07.14 at 00h 50m 12s.xml">
-      <configuration name="ProjectServiceImplTest" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest_testGetUserFromDbByIdFailure - 2018.07.15 at 15h 21m 05s.xml">
+      <configuration name="UserServiceImplTest.testGetUserFromDbByIdFailure" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AuthServiceImplTest - 2018.07.14 at 00h 50m 17s.xml">
-      <configuration name="AuthServiceImplTest" configurationId="JUnit" />
+    <history-entry file="UserServiceImplTest - 2018.07.15 at 16h 15m 04s.xml">
+      <configuration name="UserServiceImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="pl_asap_asapbe_controllers_in_spring-boot-jpa-simple-auth_test - 2018.07.14 at 00h 50m 23s.xml">
-      <configuration name="pl.asap.asapbe.controllers in spring-boot-jpa-simple-auth_test" configurationId="JUnit" />
+    <history-entry file="UserAuthDetailsServiceImplTest - 2018.07.15 at 16h 15m 08s.xml">
+      <configuration name="UserAuthDetailsServiceImplTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104425000" />
+    <option name="totallyTimeSpent" value="117337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1055,7 +1076,7 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18697916" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18697916" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
@@ -1088,35 +1109,15 @@
     <MESSAGE value="Controllers refactor plus tests for controllers" />
     <MESSAGE value="Finished controllers tests, started tests for services, started services refactor" />
     <MESSAGE value="Tests for ProjectService and related code refactors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for ProjectService and related code refactors" />
+    <MESSAGE value="Tests for TaskService and related refactors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for TaskService and related refactors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="38" />
+      <option name="time" value="42" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/controllers/ProjectController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1066">
-          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="30" column="61" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/controllers/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
@@ -1257,13 +1258,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/boostrap/DevBootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-518">
-          <caret line="19" selection-start-line="19" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/5.0.5.RELEASE/970a3ead6eb81f6d67967913bf915f7565d1a39f/spring-test-5.0.5.RELEASE-sources.jar!/org/springframework/test/web/servlet/request/MockHttpServletRequestBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -1376,20 +1370,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/controllers/ProjectControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="47" column="33" selection-start-line="46" selection-start-column="8" selection-end-line="47" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1400,31 +1384,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="108" column="50" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="50" />
+        <state relative-caret-position="497">
+          <caret line="110" column="126" selection-start-line="110" selection-start-column="126" selection-end-line="110" selection-end-column="126" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/ProjectEntity.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/ProjectServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/TaskEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserAuthDetailsServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        <state relative-caret-position="17">
+          <caret line="371" column="1" selection-start-line="371" selection-start-column="1" selection-end-line="371" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1435,27 +1405,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/ProjectServiceImplTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/TaskEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="371" column="1" lean-forward="true" selection-start-line="371" selection-start-column="1" selection-end-line="371" selection-end-column="1" />
+        <state relative-caret-position="85">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/TaskServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/ProjectEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="110" column="126" selection-start-line="110" selection-start-column="126" selection-end-line="110" selection-end-column="126" />
+        <state relative-caret-position="119">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserAuthDetailsServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/boostrap/DevBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="40" column="133" lean-forward="true" selection-start-line="40" selection-start-column="124" selection-end-line="40" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.0/7e0a2636a39bce2dc0e65d210c41e140a5d0961c/lombok-1.18.0-sources.jar!/lombok/EqualsAndHashCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/entities/UserEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/TaskServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-910">
-          <caret line="193" column="51" selection-start-line="193" selection-start-column="51" selection-end-line="193" selection-end-column="51" />
+        <state relative-caret-position="-989">
+          <caret line="167" column="45" lean-forward="true" selection-start-line="165" selection-start-column="8" selection-end-line="167" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserAuthDetailsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="19" column="65" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/asap/asapbe/services/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="111" column="37" lean-forward="true" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/asap/asapbe/services/UserServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="730">
+          <caret line="391" column="36" selection-start-line="391" selection-start-column="36" selection-end-line="391" selection-end-column="36" />
         </state>
       </provider>
     </entry>

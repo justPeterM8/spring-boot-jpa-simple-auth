@@ -1,5 +1,6 @@
 package pl.asap.asapbe.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.asap.asapbe.entities.UserAuthDetailsEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService{
     private UserAuthDetailsServiceImpl userAuthDetailsServiceImpl;
     private AuthServiceImpl authServiceImpl;
@@ -55,7 +57,8 @@ public class UserServiceImpl implements UserService{
             userAuthDetailsToSave.setUserId(savedUser.getId());
             return userAuthDetailsRepository.save(userAuthDetailsToSave);
         } else {
-            if (searchedUser.equals(new UserEntity(firstName, lastName, email, authServiceImpl.encryptPassword(password))))
+            UserEntity userEntity = new UserEntity(firstName, lastName, email, authServiceImpl.encryptPassword(password));
+            if (searchedUser.equals(userEntity))
                 return performUserLogin(email, password);
             else
                 throw new EmailAlreadyExistsInDatabaseException();

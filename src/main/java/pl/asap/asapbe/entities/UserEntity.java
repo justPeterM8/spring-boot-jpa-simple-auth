@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"tasks", "projects"})
+@EqualsAndHashCode(exclude = {"tasks", "projects", "password", "id"})
 @NoArgsConstructor
 public class UserEntity {
 
