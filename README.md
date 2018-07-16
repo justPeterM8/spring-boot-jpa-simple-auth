@@ -4,3 +4,4 @@ Application created for studies project, that is used as a backend server for an
   - spring framework
   - spring data
   - hibernate
+  - JUnit
