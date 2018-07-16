@@ -388,7 +388,60 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void testUpdateTasksDataAfterUserDeletion() {
-        //TODO positive and negative
+    public void testUpdateTasksDataAfterUserDeletionUserAvailable() {
+        UserEntity userForTask = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "qwerty123");
+        userForTask.setId(1L);
+
+        ProjectEntity project = new ProjectEntity("Test project");
+        project.setId(1L);
+        project.setSupervisor(userForTask);
+
+        TaskEntity task = new TaskEntity("Test task", "Description for test task", Status.OPEN, Priority.HIGH);
+        task.setAssignee(userForTask);
+        task.setProject(project);
+
+        Set<TaskEntity> tasks = new HashSet<>();
+        tasks.add(task);
+
+        Set<ProjectEntity> projects = new HashSet<>();
+        projects.add(project);
+
+        UserEntity user1 = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "qwerty123");
+        user1.setId(1L);
+        user1.setTasks(tasks);
+        user1.setProjects(projects);
+
+        userServiceImpl.updateTasksDataAfterUserDeletion(user1);
+
+        verify(taskRepository, times(1)).save(any(TaskEntity.class));
+    }
+
+    @Test
+    public void testUpdateTasksDataAfterUserDeletionUserNotAvailable() {
+        UserEntity userForTask = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "qwerty123");
+        userForTask.setId(2L);
+
+        ProjectEntity project = new ProjectEntity("Test project");
+        project.setId(1L);
+        project.setSupervisor(userForTask);
+
+        TaskEntity task = new TaskEntity("Test task", "Description for test task", Status.OPEN, Priority.HIGH);
+        task.setAssignee(userForTask);
+        task.setProject(project);
+
+        Set<TaskEntity> tasks = new HashSet<>();
+        tasks.add(task);
+
+        Set<ProjectEntity> projects = new HashSet<>();
+        projects.add(project);
+
+        UserEntity user1 = new UserEntity("Jan", "Kowalski", "jan_kowalski@gmail.com", "qwerty123");
+        user1.setId(1L);
+        user1.setTasks(tasks);
+        user1.setProjects(projects);
+
+        userServiceImpl.updateTasksDataAfterUserDeletion(user1);
+
+        verify(taskRepository, never()).save(any(TaskEntity.class));
     }
 }
