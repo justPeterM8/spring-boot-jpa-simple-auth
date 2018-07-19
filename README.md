@@ -5,3 +5,4 @@ Application created for studies project, that is used as a backend server for an
   - spring data
   - hibernate
   - JUnit
+  - Lombok
